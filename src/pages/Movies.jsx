@@ -1,163 +1,135 @@
-import altLogo from "../assets/Mooviez alternate logo.png";
+// import logo from "../assets/Mooviez logo.png";
+// import React, { useEffect, useState } from "react";
+// import { Link, useParams, useNavigate } from "react-router-dom";
+// import axios from "axios";
 
-function Movies() {
-  let isModalOpen = false;
+// function MovieSearches({movies: currentMovies}) => {
 
-  // FUTURE DETAIL DISPLAYING
-  async function movieDetails() {
-    // console.log("Displaying details for movie ID:", imdbID)
-    // window.location.href = `movie-details.html?id=${imdbID}`;
-    // const movieDetailsPromises = moviesData.Response.map(async (movie) => {
-    //   const detailMovie = await fetch(`https://www.omdbapi.com/?i=${movie.imdbID}&apikey=${apiKey}`);
-    //   const fullDetails = await detailMovie.json();
-    //   return fullDetails;
-    // });
+//   let navigate = useNavigate();
+//   const { imdbID } = useParams();
+//   const [movies, setMovies] = useState(currentMovies);
+//   const [loading, setLoading] = useState();
+//   const [searchID, setSearchID] = useState(imdbID);
 
-    // const fullMovies = await Promise.all(movieDetailsPromises);
-    // movieHTML(fullMovies);
-    alert("Haven't done this coding yet :'[");
-  }
+ 
 
-// const = src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-// (function(){
-//           emailjs.init({
-//           publicKey: "M_OoP5ANfy9nBleaM",
-//           });
-//         })(); 
+// // GRABBING ELEMENTS FROM HTML
+//   const movieListEl = document.querySelector(".movie-list");
+//   const searchName = document.querySelector(".searchName");
 
-  // MODAL
-// function contact(event) {
-//   event.preventDefault();
-//   const loading = document.querySelector(".modal__overlay--loading");
-//   const success = document.querySelector(".modal__overlay--success");
-//   loading.classList += " modal__overlay--visible";
-//   emailjs
-//     .sendForm(
-//       "service_lq4pqm1",
-//       "template_j57chsp",
-//       event.target,
-//       "M_OoP5ANfy9nBleaM"
-//     )
-//     .then(() => {
-//       loading.classList.remove("modal__overlay--visible");
-//       success.classList += " modal__overlay--visible";
-//     })
-//     .catch(() => {
-//       loading.classList.remove("modal__overlay--visible");
-//       alert(
-//         "The email service is temporarily unavailable. Please contact me directly at shaipattzgray@gmail.com"
-//       );
-//     });
+//   let currentMovies = [];
+
+//   // DISPLAYING MOVIES
+//   // function displayMovies(movieList) {
+//     // if (moviesDataResponse === "True" && movieList) {
+//   //     movieListEl.innerHTML = movieList
+//   //       // .map((movie) => movieHTML(movie))
+//   //       .slice(0, 10)
+//   //       .join("");
+//   // } else {
+//   //   movieListEl.innerHTML =
+//   // "<p>No mooviez found for your search. Please low a different term.</p>";
+//   // console.warn("OMDB API response:");
+//   // }
+//   // }
+
+
+
+//   // SORT BUTTON
+//   function onSortChange(event) {
+//     const sortedMovies = [...currentMovies]; // A shallow copy to avoid mutating the original 'currentMovies'
+
+//     if (onSortChange === "NEWEST") {
+//       sortedMovies.sort((a, b) => parseInt(b.Year) - parseInt(a.Year));
+//     } else if (onSortChange === "OLDEST") {
+//       sortedMovies.sort((a, b) => parseInt(a.Year) - parseInt(b.Year));
+//     } else if (onSortChange === "DESCENDING") {
+//       sortedMovies.sort((a, b) => b.Title.localeCompare(a.Title));
+//     } else if (onSortChange === "ASCENDING") {
+//       sortedMovies.sort((a, b) => a.Title.localeCompare(b.Title));
+//     }
+
+//     // displayMovies(sortedMovies); // Pass the sorted array to displayMovies
+//   }
+
+//   return (
+//     <>
+//       <nav className="container">
+//         <div className="row nav__row">
+//           <div className="nav__logo--wrapper">
+//             <figure className="nav__logo">
+//               <img className="nav__logo--img" src={logo} alt="Logo" />;
+//             </figure>
+//             <div className="nav__logo--title">
+//               <span className="purple">Mooviez</span>
+//             </div>
+//           </div>
+//           <ul className="nav__links">
+//             <li>
+//               <a href="" className="nav__link link__hover-effect">
+//                 Home
+//               </a>
+//             </li>
+//             <li>
+//               <a href="" className="nav__link link__hover-effect">
+//                 Find your Moovie
+//               </a>
+//             </li>
+//             <li>
+//               <button id="theme-toggle">Mode Toggle</button>
+//             </li>
+//           </ul>
+//         </div>
+//       </nav>
+//       <section id="results">
+//         <div className="container">
+//           <div className="row results__row">
+//             <h2 className="results__title">Search Results:</h2>
+//             <span
+//               className="searchName"
+//               //   style="color: #f8f8f8; opacity: 0.5"
+//             ></span>
+//             <h3 className="results__subtitle">
+//               Options:
+//               <select name="" id="movieSort" onchange={(event) => setSearchID(event.target.value)}>
+//                 <option value="" disabled selected>
+//                   Sort
+//                 </option>
+//                 <option value="ASCENDING">Title: A-Z</option>
+//                 <option value="DESCENDING">Title: Z-A</option>
+//                 <option value="NEWEST">Year: Newest to Oldest</option>
+//                 <option value="OLDEST">Year: Oldest to Newest</option>
+//               </select>
+//             </h3>
+//           </div>
+//           {loading
+//             ? new Array(10)
+//                 .fill(0)
+//                 .map((_) => (
+//                   <p className="loading">🍿 Loading movies...</p>
+//                 ))
+//             : movies.map((movie) => (
+//                 <div className="movie-list">
+//                   <div className="movie">
+//                     <div class="movie-card" onClick={() => navigate("/{movie}")}>
+//                       <div class="movie-card__container">
+//                         <img src={movie.Poster} alt="" />
+//                         <div class="movie-card__info">
+//                           <h4>{movie.Title}</h4>
+//                           <p>
+//                             <b>Year:</b> {movie.Year}
+//                           </p>
+//                           <p>Click the card for more details</p>
+//                         </div>
+//                       </div>
+//                     </div>
+//                   </div>
+//                 </div>
+//               ))}
+//         </div>
+//       </section>
+//     </>
+//   );
 // }
 
-function toggleModal() {
-  if (isModalOpen) {
-    isModalOpen = false;
-    return document.body.classList.remove("modal--open");
-  }
-  isModalOpen = true;
-  document.body.classList += " modal--open";
-}
-
-
-  return (
-    <>
-    <div class="movie">
-              <div class="movie-card">
-                <div class="movie-card__container">
-                  <div class="movie-card__info">
-                  <h4>Movie Name</h4>
-                  <p><b>Year:</b>Movie Year</p>
-                  <p><b>Genre:</b>Movie Genre</p>
-                  <p><b>Rating:</b>Movie Rating</p>
-                  </div>
-                </div>
-              </div>
-             </div>
-    <div class="modal">
-        <div class="modal__half modal__right">
-          <i class="fa-solid fa-xmark modal__exit click" onclick="toggleModal()"></i>
-          <h3 class="modal__title modal__title--right">Let's have a chat!</h3>
-          <h4 class="modal__subtitle modal__subtitle--right">Any beef about our udderly great moovies - milk the moo-ment!</h4>
-          <form id="contact__form" onsubmit="contact(event)">
-            <div class="form__item">
-              <label class="form__item--label">Name</label>
-              <input class="input" name="user_name" type="text" required></input>
-            </div>
-            <div class="form__item">
-              <label class="form__item--label">Email</label>
-              <input class="input" name="user_email" type="email" required></input>
-            </div>
-                <div class="form__item">
-                  <label class="form__item--label">Message</label>
-                    <textarea class="input" name="message" type="text" required></textarea>
-                </div>
-                <button id="contact__submit" class="form__submit">
-                  Join the Herd
-                </button>
-              </form>
-              <div class="modal__overlay modal__overlay--loading">
-                <i class="fa-solid fa-spinner"></i>
-              </div>
-              <div class="modal__overlay modal__overlay--success">
-                Holy cow, Appreciate your message! Looking forward to grazing with you soon. 🐮
-              </div>
-            </div>
-            </div>
-      <footer id="footer">
-        <div class="container">
-          <div class="row footer__row">
-            <div class="footer__top">
-              <div class="footer__right">
-                <figure class="footer__logo">
-                  <img
-                    class="footer__logo--img"
-                    src={altLogo}
-                    alt="Alt Logo"
-                  />
-                </figure>
-              </div>
-              <div class="footer__left">
-                <div class="footer__social--list">
-                  <a
-                    class="footer__social--link link__hover-effect"
-                    href="https://github.com/Shaibee19"
-                    target="_blank"
-                  >
-                    GitHub
-                  </a>
-                  <a
-                    class="footer__social--link link__hover-effect"
-                    href="https://www.linkedin.com/in/shai-gray-woodland-aa285343/"
-                    target="_blank"
-                  >
-                    LinkedIn
-                  </a>
-                  <a
-                    class="footer__social--link link__hover-effect"
-                    href="#"
-                    onclick="toggleModal()"
-                  >
-                    Contact
-                  </a>
-                  <a
-                    class="footer__social--link link__hover-effect"
-                    href="./assets/Shai Gray-Woodland Resume 20250513.pdf"
-                    target="_blank"
-                  >
-                    Resume
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="footer__copyright">
-              Copyright © 2025 Shai Gray-Woodland
-            </div>
-          </div>
-        </div>
-      </footer>
-    </>
-  );
-}
-
-export default Movies;
+// export default MovieSearches;
