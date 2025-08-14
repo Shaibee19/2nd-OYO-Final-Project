@@ -1,6 +1,19 @@
+import { useState } from "react";
 import Movie from "./ui/Movie";
+import axios from "axios";
 
-const Featured = () => {
+const Featured = ({ movies }) => {
+  const apiKey = "4ea1d0b9";
+  const [movies, setMovies] = useState([]);
+
+  // DISPLAYING MOVIES
+  async function fetchMovies() {
+    const { data } = await axios.get(
+      `https://www.omdbapi.com/?apikey=${apiKey}&`
+    );
+    setMovies(data);
+  }
+
   return (
     <>
       <section id="features">
@@ -11,7 +24,7 @@ const Featured = () => {
             </h2>
             <div className="movies">
               {movies
-                .filter((movie) => movie.rating === 5)
+                .random()
                 .slice(0, 4)
                 .map((movie) => (
                   <Movie movie={movie} key={movie.id} />

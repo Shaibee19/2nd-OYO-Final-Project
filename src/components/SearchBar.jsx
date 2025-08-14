@@ -1,6 +1,31 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const SearchBar = () => {
+    // const { imdbID } = useParams();
+  // const [searchInput, setSearchInput] = useState(imdbID);
+
+  // SEARCH BUTTON
+// function onSearchChange(event) {
+//   main(event.target.value);
+//   searchName.innerHTML = event.target.value;
+
+//   const searchForm = document.getElementById("search-form");
+//   const searchInput = document.getElementById("search-input");
+
+//   searchForm.addEventListener("submit", (e) => {
+//     e.preventDefault();
+//     const query = searchInput.value.trim();
+//     if (query) {
+//       main(query);
+//     }
+//   });
+// }
+
+  // "<p>No mooviez found for your search. Please low a different term.</p>";
+  // console.warn("OMDB API response:");=
+  
+  // fetchMovies();
+
   return (
     <>
       <header id="header">
