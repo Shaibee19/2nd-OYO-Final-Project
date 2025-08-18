@@ -76,52 +76,52 @@ const Nav = () => {
           </ul>
         </div>
       </nav>
-      <div class="modal">
-        <div class="modal__half modal__right">
+      <div className="modal">
+        <div className="modal__half modal__right">
           <i
-            class="fa-solid fa-xmark modal__exit click"
+            className="fa-solid fa-xmark modal__exit click"
             onClick={closeModal}
           ></i>
-          <h3 class="modal__title modal__title--right">Let's have a chat!</h3>
-          <h4 class="modal__subtitle modal__subtitle--right">
+          <h3 className="modal__title modal__title--right">Let's have a chat!</h3>
+          <h4 className="modal__subtitle modal__subtitle--right">
             Any beef about our udderly great moovies - milk the moo-ment!
           </h4>
-          <form id="contact__form" onSubmit={contact(event)}>
-            <div class="form__item">
-              <label class="form__item--label">Name</label>
+          {/* <form id="contact__form" onSubmit={contact(event)}> */}
+            <div className="form__item">
+              <label className="form__item--label">Name</label>
               <input
-                class="input"
+                className="input"
                 name="user_name"
                 type="text"
                 required
               ></input>
             </div>
-            <div class="form__item">
-              <label class="form__item--label">Email</label>
+            <div className="form__item">
+              <label className="form__item--label">Email</label>
               <input
-                class="input"
+                className="input"
                 name="user_email"
                 type="email"
                 required
               ></input>
             </div>
-            <div class="form__item">
-              <label class="form__item--label">Message</label>
+            <div className="form__item">
+              <label className="form__item--label">Message</label>
               <textarea
-                class="input"
+                className="input"
                 name="message"
                 type="text"
                 required
               ></textarea>
             </div>
-            <button id="contact__submit" class="form__submit">
+            <button id="contact__submit" className="form__submit">
               Join the Herd
             </button>
-          </form>
-          <div class="modal__overlay modal__overlay--loading">
-            <i class="fa-solid fa-spinner"></i>
+          {/* </form> */}
+          <div className="modal__overlay modal__overlay--loading">
+            <i className="fa-solid fa-spinner"></i>
           </div>
-          <div class="modal__overlay modal__overlay--success">
+          <div className="modal__overlay modal__overlay--success">
             Holy cow, Appreciate your message! Looking forward to grazing with
             you soon. 🐮
           </div>

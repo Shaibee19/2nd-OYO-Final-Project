@@ -1,8 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Movie from "../components/ui/Movie";
+import { useSearchParams } from "react-router-dom";
 
-const MovieSearches = ({ movies: initialMovies }) => {
-  const [movies, setMovies] = useState(initialMovies);
+function MovieSearches() {
+  const [movies, setMovies] = useState([]);
+  const [searchParams] = useSearchParams();
+  const searchInput = searchParams.get("s");
+
+  useEffect(() => {
+    if (searchInput) {
+      searchMovies(searchInput).then((results) => {
+        setMovies(results.slice(0, 8));
+      });
+    }
+  }, [searchInput]);
 
   // SORT BUTTON
   function filterMovies(filter) {
@@ -29,14 +40,14 @@ const MovieSearches = ({ movies: initialMovies }) => {
             <h2 className="results__title">Search Results:</h2>
             <span
               className="searchName"
-              //   style="color: #f8f8f8; opacity: 0.5"
+              //   for {searchInput} style="color: #f8f8f8; opacity: 0.5"
             ></span>
             <h3 className="results__subtitle">
               Options:
               <select
                 id="movieSort"
                 defaultValue="DEFAULT"
-                onChange={(event) => filterMovies(event.target.value)}
+                onChange={(e) => filterMovies(e.target.value)}
               >
                 <option value="DEFAULT" disabled>
                   Sort
@@ -48,16 +59,15 @@ const MovieSearches = ({ movies: initialMovies }) => {
               </select>
             </h3>
           </div>
-         {movies.map((movie) => (
-                  <Movie movie={movie} key={movie.imdbID} />
-                ))}
+          {movies.map((movie) => (
+            <Movie movie={movie} key={movie.imdbID} />
+          ))}
         </div>
       </section>
     </>
   );
-};
+}
 
 export default MovieSearches;
 
-
-// show <Fetured /> when nothing has been Searched yet 
+// ****** wish list ****** show <Fetured /> when nothing has been Searched yet

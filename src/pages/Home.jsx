@@ -9,6 +9,7 @@ function Home() {
         <section id="navigation">
           <SearchBar />
         </section>
+        <Featured />
       </div>
     </>
   );
