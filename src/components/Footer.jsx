@@ -1,13 +1,18 @@
+import { useState } from "react";
 import altLogo from "../assets/Mooviez alternate logo.png";
+import Modal from "./Modal";
+import { Link } from "react-router-dom";
 
-const Footer = () => {
-  // function openMenu() {
-  //   document.body.classList += " menu--open";
-  // }
+function Footer() {
+  const [showModal, setShowModal] = useState(false);
 
-  // function closeMenu() {
-  //   document.body.classList.remove("menu--open");
-  // }
+  function openModal() {
+    setShowModal(true);
+  }
+
+  function closeModal() {
+    setShowModal(false);
+  }
 
   return (
     <>
@@ -26,34 +31,27 @@ const Footer = () => {
               </div>
               <div className="footer__left">
                 <div className="footer__social--list">
-                  <a
+                  <Link to="https://github.com/Shaibee19"
                     className="footer__social--link link__hover-effect"
-                    href="https://github.com/Shaibee19"
-                    target="_blank"
                   >
                     GitHub
-                  </a>
-                  <a
+                  </Link>
+                  <Link to="https://www.linkedin.com/in/shai-gray-woodland-aa285343/"
                     className="footer__social--link link__hover-effect"
-                    href="https://www.linkedin.com/in/shai-gray-woodland-aa285343/"
-                    target="_blank"
                   >
                     LinkedIn
-                  </a>
-                  <a
+                  </Link>
+                  <Link to="#"
                     className="footer__social--link link__hover-effect"
-                    href="#"
-                    // onClick={toggleModal}
+                    onClick={openModal}
                   >
                     Contact
-                  </a>
-                  <a
+                  </Link>
+                  <Link to="../assets/Shai Gray-Woodland Resume 20250513.pdf"
                     className="footer__social--link link__hover-effect"
-                    href=""
-                    target="_blank"
                   >
                     Resume
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -63,8 +61,9 @@ const Footer = () => {
           </div>
         </div>
       </footer>
+      {showModal && <Modal closeModal={closeModal} />}
     </>
   );
-};
+}
 
 export default Footer;

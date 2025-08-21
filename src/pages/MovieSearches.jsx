@@ -1,19 +1,51 @@
 import { useEffect, useState } from "react";
-import Movie from "../components/ui/Movie";
-import { useSearchParams } from "react-router-dom";
+import Movie from "../components/Movie";
+import { Link, useSearchParams } from "react-router-dom";
+import axios from "axios";
 
 function MovieSearches() {
+  // DISPLAYING MOVIES
+  const apiKey = "4ea1d0b9";
+  const baseURL = "https://www.omdbapi.com/";
   const [movies, setMovies] = useState([]);
   const [searchParams] = useSearchParams();
   const searchInput = searchParams.get("s");
 
-  useEffect(() => {
-    if (searchInput) {
-      searchMovies(searchInput).then((results) => {
-        setMovies(results.slice(0, 8));
-      });
+  // BY TITLE
+  async function searchMovies(searchInput) {
+    try {
+      const { data } = await axios.get(
+        `${baseURL}?s=${searchInput}&apikey=${apiKey}`
+      );
+      setMovies(data);
+    } catch (err) {
+      console.error("Error fetching movies:", err);
+      <p>
+        An error occurred while rounding up those mooviez. Please try again
+        later.
+      </p>;
+      return;
     }
-  }, [searchInput]);
+  }
+
+  function renderMovies() {
+    return movies.map((movie) => (
+      <Link to={`/movie/${movie.imdbID}`} key={movie.imdbID}>
+        <Movie poster={movie.Poster} title={movie.Title} year={movie.Year} />
+      </Link>
+    ));
+  }
+
+  function renderSkeleton() {
+    <>
+      <p className="loading">🍿 Loading movies...</p>
+      <div className="movie__img--skeleton"></div>
+      <div className="skeleton movie__title--skeleton"></div>
+      <div className="skeleton movie__year--skeleton"></div>
+      <div className="skeleton movie__description--skeleton"></div>
+    </>;
+    return;
+  }
 
   // SORT BUTTON
   function filterMovies(filter) {
@@ -31,6 +63,14 @@ function MovieSearches() {
       setMovies(movies.slice().sort((a, b) => a.Title.localeCompare(b.Title)));
     }
   }
+
+  useEffect(() => {
+    if (searchInput) {
+      searchMovies(searchInput).then((results) => {
+        setMovies(results.slice(0, 8));
+      });
+    }
+  }, [searchInput]);
 
   return (
     <>
@@ -59,9 +99,7 @@ function MovieSearches() {
               </select>
             </h3>
           </div>
-          {movies.map((movie) => (
-            <Movie movie={movie} key={movie.imdbID} />
-          ))}
+          {movies.length ? renderMovies() : renderSkeleton()}
         </div>
       </section>
     </>
@@ -69,5 +107,3 @@ function MovieSearches() {
 }
 
 export default MovieSearches;
-
-// ****** wish list ****** show <Fetured /> when nothing has been Searched yet
