@@ -430,6 +430,11 @@ input {
   color: white;
 }
 
+.searchName {
+  opacity: 0.5;
+  color: #f8f8f8;
+}
+
 /* RESULTS */
 
 .results__row {

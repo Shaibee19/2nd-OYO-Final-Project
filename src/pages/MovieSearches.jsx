@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Movie from "../components/Movie";
 import { Link, useSearchParams } from "react-router-dom";
 import axios from "axios";
+import SearchBar from "../components/ui/SearchBar";
 
 function MovieSearches() {
   // DISPLAYING MOVIES
@@ -14,9 +15,8 @@ function MovieSearches() {
   // BY TITLE
   async function searchMovies(searchInput) {
     try {
-      const { data } = await axios.get(
-        `${baseURL}?s=${searchInput}&apikey=${apiKey}`
-      );
+      const { data } = await axios.get(`${baseURL}?s=${searchInput}&apikey=${apiKey}`);
+      console.log(data);
       setMovies(data);
     } catch (err) {
       console.error("Error fetching movies:", err);
@@ -74,14 +74,12 @@ function MovieSearches() {
 
   return (
     <>
+    <SearchBar />
       <section id="results">
         <div className="container">
           <div className="row results__row">
             <h2 className="results__title">Search Results:</h2>
-            <span
-              className="searchName"
-              //   for {searchInput} style="color: #f8f8f8; opacity: 0.5"
-            ></span>
+            <span className="searchName"></span>
             <h3 className="results__subtitle">
               Options:
               <select

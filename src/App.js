@@ -12,8 +12,8 @@ function App() {
         <Nav />
         <Routes>
           <Route path="/" exact element={<Home />} />
-          <Route path="/search" exact render={() => <MovieSearches />} />
-          <Route path="/movie/:imdbID" exact render={() => <MovieInfo />} />
+          <Route path="/search" exact element={<MovieSearches />} />
+          <Route path="/movie/:imdbID" exact element={<MovieInfo />} />
         </Routes>
         <Footer />
       </div>
