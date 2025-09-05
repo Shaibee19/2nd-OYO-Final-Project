@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Movie from "../components/Movie";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import SearchBar from "../components/ui/SearchBar";
 
@@ -8,82 +8,72 @@ function MovieSearches() {
   // DISPLAYING MOVIES
   const apiKey = "4ea1d0b9";
   const baseURL = "https://www.omdbapi.com/";
+
   const [movies, setMovies] = useState([]);
-  const [searchParams] = useSearchParams();
-  const searchInput = searchParams.get("s");
+  const [searchInput, setSearchInput] = useState("");
 
   // BY TITLE
-  async function searchMovies(searchInput) {
+  async function searchMovies(query) {
     try {
-      const { data } = await axios.get(`${baseURL}?s=${searchInput}&apikey=${apiKey}`);
-      console.log(data);
-      setMovies(data);
+      const { data } = await axios.get(
+        `${baseURL}?s=${query}&apikey=${apiKey}`
+      );
+      setMovies(data.Search || []); // OMDB returns { Search: [...] }
     } catch (err) {
       console.error("Error fetching movies:", err);
-      <p>
-        An error occurred while rounding up those mooviez. Please try again
-        later.
-      </p>;
-      return;
+      // <p>
+      //   An error occurred while rounding up those mooviez. Please try again
+      //   later.
+      // </p>;
+      setMovies([]);
+    }
+  }
+
+  function handleSearch(e) {
+    e.preventDefault();
+    if (searchInput.trim() !== "") {
+      searchMovies(searchInput);
     }
   }
 
   function renderMovies() {
     return movies.map((movie) => (
       <Link to={`/movie/${movie.imdbID}`} key={movie.imdbID}>
-        <Movie poster={movie.Poster} title={movie.Title} year={movie.Year} />
+        <Movie movie={movie} />
       </Link>
     ));
   }
 
-  function renderSkeleton() {
-    <>
-      <p className="loading">🍿 Loading movies...</p>
-      <div className="movie__img--skeleton"></div>
-      <div className="skeleton movie__title--skeleton"></div>
-      <div className="skeleton movie__year--skeleton"></div>
-      <div className="skeleton movie__description--skeleton"></div>
-    </>;
-    return;
-  }
-
   // SORT BUTTON
   function filterMovies(filter) {
-    if (filter === "NEWEST") {
-      setMovies(
-        movies.slice().sort((a, b) => parseInt(b.Year) - parseInt(a.Year))
-      );
-    } else if (filter === "OLDEST") {
-      setMovies(
-        movies.slice().sort((a, b) => parseInt(a.Year) - parseInt(b.Year))
-      );
-    } else if (filter === "DESCENDING") {
-      setMovies(movies.slice().sort((a, b) => b.Title.localeCompare(a.Title)));
-    } else if (filter === "ASCENDING") {
-      setMovies(movies.slice().sort((a, b) => a.Title.localeCompare(b.Title)));
-    }
-  }
+    if (!movies.length) return;
 
-  useEffect(() => {
-    if (searchInput) {
-      searchMovies(searchInput).then((results) => {
-        setMovies(results.slice(0, 8));
-      });
-    }
-  }, [searchInput]);
+    let sorted = [...movies];
+    if (filter === "NEWEST")
+      sorted.sort((a, b) => parseInt(b.Year) - parseInt(a.Year));
+    if (filter === "OLDEST")
+      sorted.sort((a, b) => parseInt(a.Year) - parseInt(b.Year));
+    if (filter === "ASCENDING")
+      sorted.sort((a, b) => a.Title.localeCompare(b.Title));
+    if (filter === "DESCENDING")
+      sorted.sort((a, b) => b.Title.localeCompare(a.Title));
+    setMovies(sorted);
+  }
 
   return (
     <>
-    <SearchBar />
+      <SearchBar
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+        handleSearch={handleSearch}
+      />
       <section id="results">
         <div className="container">
           <div className="row results__row">
             <h2 className="results__title">Search Results:</h2>
-            <span className="searchName"></span>
             <h3 className="results__subtitle">
               Options:
               <select
-                id="movieSort"
                 defaultValue="DEFAULT"
                 onChange={(e) => filterMovies(e.target.value)}
               >
@@ -97,7 +87,19 @@ function MovieSearches() {
               </select>
             </h3>
           </div>
-          {movies.length ? renderMovies() : renderSkeleton()}
+          <div className="movie__container">
+            {movies.length ? (
+              renderMovies()
+            ) : (
+              <>
+                <p className="loading">🍿 Loading movies...</p>
+                {/* <div className="movie__img--skeleton"></div>
+                <div className="skeleton movie__title--skeleton"></div>
+                <div className="skeleton movie__year--skeleton"></div>
+                <div className="skeleton movie__description--skeleton"></div> */}
+              </>
+            )}
+          </div>
         </div>
       </section>
     </>
@@ -105,3 +107,14 @@ function MovieSearches() {
 }
 
 export default MovieSearches;
+
+
+
+
+// useEffect(() => {
+//     if (searchInput) {
+//       searchMovies(searchInput).then((results) => {
+//         setMovies(results.slice(0, 8));
+//       });
+//     }
+//   }, [searchInput]);

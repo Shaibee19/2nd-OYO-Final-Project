@@ -4,15 +4,15 @@ import { Navigate } from "react-router-dom";
 function Movie({ movie }) {
   return (
     <>
-      <div className="movie-list">
+      {(`movies/${movie.imdbID}`) ? (<div className="movie-list">
               <div className="movie">
                 <div
-                  class="movie-card"
+                  className="movie-card"
                   onClick={() => Navigate(`/movies/${movie.imdbID}`)}
                 >
-                  <div class="movie-card__container">
+                  <div className="movie-card__container">
                     <img src={movie.Poster} alt="" />
-                    <div class="movie-card__info">
+                    <div className="movie-card__info">
                       <h4>{movie.Title}</h4>
                       <p>
                         <b>Year:</b> {movie.Year}
@@ -22,7 +22,31 @@ function Movie({ movie }) {
                   </div>
                 </div>
               </div>
-            </div>
+            </div>) : (<div className="movie">
+                <div
+                  className="movie-card"
+                >
+                  <div className="movie-card__container">
+                    <img src={movie.Poster} alt="" />
+                    <div className="movie-card__info">
+                      <h4>{movie.Title}</h4>
+                      <p>
+                        <b>Runtime:</b> {movie.Runtime}
+                        <b>Released:</b> {movie.Released}
+                        <b>Ratings:</b> {movie.Ratings}
+                        <b>Genre:</b> {movie.Genre}
+                        <b>Awards:</b> {movie.Awards}
+                        <b>BoxOffice:</b> {movie.BoxOffice}
+                        <b>Plot:</b> {movie.Plot}
+                        <b>Actors:</b> {movie.Actors}
+                        <b>Writers:</b> {movie.Writers}
+                        <b>Directors:</b> {movie.Directors}
+                      </p>
+                      <p>Click the card for more details</p>
+                    </div>
+                  </div>
+                </div>
+              </div>)}
     </>
   )
 };
