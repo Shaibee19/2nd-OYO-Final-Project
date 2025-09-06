@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Movie from "../components/Movie";
 import Description from "../components/ui/Description";
 import BoxOffice from "../components/ui/BoxOffice";
 import Rating from "../components/ui/Rating";
@@ -11,14 +10,24 @@ function MovieInfo() {
   const apiKey = "4ea1d0b9";
   const baseURL = "https://www.omdbapi.com/";
   const { imdbID } = useParams();
-  const [movie, setMovie] = useState(null);
+  const [detailedMovie, setDetailedMovie] = useState([]);
 
   // BY IMDB
-  async function fetchMovieByIMDB() {
+  async function fetchMovieByIMDB({ imdbID }) {
     const { data } = await axios.get(
-      `${baseURL}?i=${movie.imdbID}&apikey=${apiKey}`
+      `${baseURL}?i=${imdbID}&apikey=${apiKey}`
     );
-    setMovie(data);
+    setDetailedMovie(data);
+  }
+
+  function renderMovie() {
+    return detailedMovie.map((movie) => (
+      <>
+        <Description movie={movie} />
+        <BoxOffice />
+        <Rating />
+      </>
+    ));
   }
 
   useEffect(() => {
@@ -27,10 +36,19 @@ function MovieInfo() {
 
   return (
     <>
-      <Movie />
-      <Description />
-      <BoxOffice />
-      <Rating />
+      <div className="movie__container">
+        {detailedMovie.length ? (
+          renderMovie()
+        ) : (
+          <>
+            <p className="loading">🍿 Loading movie...</p>
+            {/* <div className="movie__img--skeleton"></div>
+                <div className="skeleton movie__title--skeleton"></div>
+                <div className="skeleton movie__year--skeleton"></div>
+                <div className="skeleton movie__description--skeleton"></div> */}
+          </>
+        )}
+      </div>
     </>
   );
 }
