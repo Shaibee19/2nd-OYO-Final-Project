@@ -19,6 +19,10 @@ function MovieInfo() {
     );
     setDetailedMovie(data);
   }
+  
+  useEffect(() => {
+    fetchMovieByIMDB({ imdbID });
+  }, []);
 
   function renderMovie() {
     return detailedMovie.map((movie) => (
@@ -29,11 +33,7 @@ function MovieInfo() {
       </>
     ));
   }
-
-  useEffect(() => {
-    fetchMovieByIMDB(imdbID);
-  }, []);
-
+  
   return (
     <>
       <div className="movie__container">
