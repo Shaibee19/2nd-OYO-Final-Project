@@ -42,9 +42,9 @@ function Nav() {
                 Contact
               </Link>
             </li>
-            <li>
+            {/* <li>
               <button id="theme-toggle">Mode Toggle</button>
-            </li>
+            </li> */}
           </ul>
         </div>
       </nav>

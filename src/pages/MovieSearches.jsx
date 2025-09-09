@@ -21,10 +21,7 @@ function MovieSearches() {
       setMovies(data.Search || []); // OMDB returns { Search: [...] }
     } catch (err) {
       console.error("Error fetching movies:", err);
-      // <p>
-      //   An error occurred while rounding up those mooviez. Please try again
-      //   later.
-      // </p>;
+      <p> An error occurred while rounding up those mooviez. Please try again later.</p>;
       setMovies([]);
     }
   }
@@ -91,13 +88,7 @@ function MovieSearches() {
             {movies.length ? (
               renderMovies()
             ) : (
-              <>
-                <p className="loading">🍿 Loading movies...</p>
-                {/* <div className="movie__img--skeleton"></div>
-                <div className="skeleton movie__title--skeleton"></div>
-                <div className="skeleton movie__year--skeleton"></div>
-                <div className="skeleton movie__description--skeleton"></div> */}
-              </>
+            <p className="loading">🍿 Loading movies...</p>
             )}
           </div>
         </div>

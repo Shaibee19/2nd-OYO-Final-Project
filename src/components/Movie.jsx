@@ -1,30 +1,30 @@
 import { Navigate } from "react-router-dom";
 
-
 function Movie({ movie }) {
   return (
     <>
       <div className="movie-list">
-              <div className="movie">
-                <div
-                  className="movie-card"
-                  onClick={() => Navigate(`/movie/${movie.imdbID}`)}
-                >
-                  <div className="movie-card__container">
-                    <img src={movie.Poster} alt="" />
-                    <div className="movie-card__info">
-                      <h4>{movie.Title}</h4>
-                      <p>
-                        <b>Year:</b> {movie.Year}
-                      </p>
-                      <p>Click the card for more details</p>
-                    </div>
-                  </div>
-                </div>
+        <div className="movie">
+          <div className="movie-card">
+            <div className="movie-card__container">
+              <img src={movie.Poster} alt="" />
+              <div className="movie-card__info">
+                <h4>{movie.Title}</h4>
+                <p>
+                  <b>Year:</b> {movie.Year}
+                </p>
+                <p>Click the card for more details</p>
               </div>
             </div>
-    </>
-  )
-};
+          </div>
+        </div>
+      </div>
+    </> 
+    // ) : (<div className="movie__img--skeleton"></div>
+    // <div className="skeleton movie__title--skeleton"></div>
+    // <div className="skeleton movie__year--skeleton"></div>
+    // <div className="skeleton movie__description--skeleton"></div> )}
+  );
+}
 
 export default Movie;

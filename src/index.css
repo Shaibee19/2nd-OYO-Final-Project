@@ -86,7 +86,7 @@ a {
   height: 3px;
   width: 0;
   right: 0;
-  background-color: #cf9dff;
+  background-color: #e08bf8;
   transition: all 300ms ease;
 }
 
@@ -102,7 +102,7 @@ h4 {
   margin-bottom: 8px;
 }
 
-#theme-toggle {
+/* #theme-toggle {
   padding: 10px 16px;
   border: none;
   background-color: #ff8800;
@@ -114,7 +114,7 @@ h4 {
 
 #theme-toggle:hover {
   background-color: #b33600;
-}
+} */
 
 /* NAVIGATION */
 
@@ -176,7 +176,7 @@ nav {
   padding: 10px 32px;
   margin-top: 2px;
   border-radius: 9999px;
-  background: #fc4cc7;
+  background: #ff8800;
   color: #f6f3ef;
   line-height: 1.5;
   border: none;
@@ -190,7 +190,7 @@ nav {
   bottom: -1px;
   height: 2px;
   width: 100%;
-  background: #ad20c2ea;
+  background: #b33600;
 }
 
 .bg--img {
@@ -479,9 +479,6 @@ justify-content: space-around;
   box-shadow: 0 16px 24px 0 #7dc1e9;
 }
 
-.movie-card__container {
-  padding: 2px 16px;
-}
 
 .movie-list {
   display: grid;
@@ -490,9 +487,13 @@ justify-content: space-around;
   margin-top: 20px;
 }
 
+.movie-card__container {
+padding: 2px 16px;
+}
+
 .movie-card {
   width: 15vw;
-  height: 80vh;
+  height: 50vh;
   background-color: #fff;
   margin: 10px;
   border-radius: 12px;
@@ -526,6 +527,92 @@ justify-content: space-around;
   font-size: 14px;
   margin-bottom: 4px;
 }
+
+.detailedMovie {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detailedMovie-card {
+  width: 80%;
+  height: 80vh;
+  background-color: #fff;
+  margin: 10px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  border: solid #ffffff;
+}
+
+.detailedMovie-card:hover {
+  box-shadow: 0 16px 16px 16px #7dc1e9;
+}
+
+.skeleton {
+  background-color: rgb(227, 227, 227) !important;
+  margin-bottom: 8px;
+}
+
+.movie__img--skeleton {
+  width: 100%;
+  max-width: 250px;
+  height: 320px;
+  background-color: rgb(204, 204, 204);
+  margin-bottom: 8px;
+}
+
+.movie__title--skeleton {
+  height: 21px;
+  width: 100%;
+}
+
+.movie__year--skeleton {
+  width: 100px;
+  height: 19px;
+}
+
+.movie__description--skeleton {
+  width : 200px;
+  height: 19px;
+}
+.detailedMovie-card__container {
+padding: 2px 16px;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.detailedMovie-card img {
+  width: 100%;
+  height: auto;
+}
+
+.detailedMovie-card__info {
+  padding: 16px;
+}
+
+.detailedMovie-card__info h4 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.detailedMovie-card__info p {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.detailedMovie-card__ratings {
+  background-color: rgba(30, 30, 30, 0.85);
+  padding: 8px;
+  border-radius: 5px;
+  color: #bbff00ea;
+  font-size: 16px;
+  width: 280px;
+}
+
 
 /* FOOTER */
 

@@ -33,11 +33,15 @@ function Footer() {
                 <div className="footer__social--list">
                   <Link to="https://github.com/Shaibee19"
                     className="footer__social--link link__hover-effect"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     GitHub
                   </Link>
                   <Link to="https://www.linkedin.com/in/shai-gray-woodland-aa285343/"
                     className="footer__social--link link__hover-effect"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     LinkedIn
                   </Link>
@@ -47,11 +51,13 @@ function Footer() {
                   >
                     Contact
                   </Link>
-                  <Link to="../assets/Shai Gray-Woodland Resume 20250513.pdf"
+                  <a href={`${process.env.PUBLIC_URL}/Shai Gray-Woodland Resume 20250513.pdf`}
                     className="footer__social--link link__hover-effect"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     Resume
-                  </Link>
+                  </a>
                 </div>
               </div>
             </div>

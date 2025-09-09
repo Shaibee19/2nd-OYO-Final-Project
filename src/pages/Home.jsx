@@ -20,10 +20,7 @@ function Home() {
       setMovies(data.Search || []); // OMDB returns { Search: [...] }
     } catch (err) {
       console.error("Error fetching movies:", err);
-      // <p>
-      //   An error occurred while rounding up those mooviez. Please try again
-      //   later.
-      // </p>;
+      <p>An error occurred while rounding up those mooviez. Please try again later.</p>;
       setMovies([]);
     }
   }
