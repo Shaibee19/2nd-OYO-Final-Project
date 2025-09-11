@@ -16,7 +16,7 @@ function MovieSearches() {
   const [error, setError] = useState(null); // Add error state
   
   const [params] = useSearchParams();
-  const q = params.get("q") || "";
+  const q = params.get("q") || ""; // If none, empty string
   
   // BY TITLE
   async function searchMovies(query) {
@@ -33,7 +33,6 @@ function MovieSearches() {
     } catch (err) {
       setError("Failed to fetch movies")
       console.error("Error fetching movies:", err);
-      <p> An error occurred while rounding up those mooviez. Please try again later.</p>;
       setMovies([]);
     } finally {
       setLoading(false);
@@ -71,7 +70,7 @@ function MovieSearches() {
     setMovies(sorted);
   }
 
-  useEffect(() => {renderMovies();}, [q]);
+  useEffect(() => {searchMovies();}, [q]);
 
   return (
     <>
@@ -104,8 +103,9 @@ function MovieSearches() {
             {loading ? (
               <p className="loading">🍿 Loading movies...</p>
             ) : error ? (
-              <p className="error">Error: {error}</p>
+              <p className="error">Error: An error occurred while rounding up those mooviez. Please try again later. {error}</p>
             ) : movies.length ? (
+              <p className="loading"> Search Results for "{q}"</p>,
               renderMovies()
             ) : null}
           </div>
