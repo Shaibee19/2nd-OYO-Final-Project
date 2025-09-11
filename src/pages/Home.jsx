@@ -1,6 +1,6 @@
 import SearchBar from "../components/ui/SearchBar";
 import Featured from "../components/ui/Featured";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Movie from "../components/Movie";
@@ -51,7 +51,6 @@ function Home() {
           />
         </section>
         <Featured />
-        {/*const randomIndex = Math.floor(Math.random() * movies.length) return movies[randomIndex] */}
       </div>
     </>
   );

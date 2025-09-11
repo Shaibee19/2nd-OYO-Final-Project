@@ -18,7 +18,7 @@ const SearchBar = ({ searchInput, setSearchInput, handleSearch }) => {
           <button
             type="submit"
             className="search__wrapper"
-            onClick={() => navigate(`/search`)}
+            onClick={() => navigate(`/search?q=${encodeURIComponent(searchInput)}`)}
           >
             <FontAwesomeIcon icon="magnifying-glass" />
           </button>

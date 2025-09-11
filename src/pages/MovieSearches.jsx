@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Movie from "../components/Movie";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import SearchBar from "../components/ui/SearchBar";
 
@@ -12,17 +12,31 @@ function MovieSearches() {
   const [movies, setMovies] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
+  const [loading, setLoading] = useState(true); // Add loading state
+  const [error, setError] = useState(null); // Add error state
+  
+  const [params] = useSearchParams();
+  const q = params.get("q") || "";
+  
   // BY TITLE
   async function searchMovies(query) {
     try {
+      setLoading(true);
       const { data } = await axios.get(
         `${baseURL}?s=${query}&apikey=${apiKey}`
       );
-      setMovies(data.Search || []); // OMDB returns { Search: [...] }
+      if (data.Response === "False") {
+        setError(data.Error);
+      } else {
+        setMovies(data.Search.slice(0, 10) || [].slice(0, 10)); // OMDB returns { Search: [...] }
+      }
     } catch (err) {
+      setError("Failed to fetch movies")
       console.error("Error fetching movies:", err);
       <p> An error occurred while rounding up those mooviez. Please try again later.</p>;
       setMovies([]);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -57,6 +71,8 @@ function MovieSearches() {
     setMovies(sorted);
   }
 
+  useEffect(() => {renderMovies();}, [q]);
+
   return (
     <>
       <SearchBar
@@ -85,11 +101,13 @@ function MovieSearches() {
             </h3>
           </div>
           <div className="movie__container">
-            {movies.length ? (
+            {loading ? (
+              <p className="loading">🍿 Loading movies...</p>
+            ) : error ? (
+              <p className="error">Error: {error}</p>
+            ) : movies.length ? (
               renderMovies()
-            ) : (
-            <p className="loading">🍿 Loading movies...</p>
-            )}
+            ) : null}
           </div>
         </div>
       </section>
@@ -100,12 +118,3 @@ function MovieSearches() {
 export default MovieSearches;
 
 
-
-
-// useEffect(() => {
-//     if (searchInput) {
-//       searchMovies(searchInput).then((results) => {
-//         setMovies(results.slice(0, 8));
-//       });
-//     }
-//   }, [searchInput]);

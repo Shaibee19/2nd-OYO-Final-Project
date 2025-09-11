@@ -1,5 +1,5 @@
 function Modal({ closeModal, onSubmit }) {
-  // MODAL EMAIL FUNCTION
+  // MODAL EMAIL FUNCTION?
   // <script> src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"</script>
   //   <script> (function(){
   //         emailjs.init({
@@ -8,7 +8,7 @@ function Modal({ closeModal, onSubmit }) {
   //       })();
   // </script>
 
-  // THIS WILL EVETUALLY BE THE ONSUBMIT
+  // THIS WILL EVETUALLY BE THE ONSUBMIT?
   // function contact(event) {
   //   event.preventDefault();
   //   const loading = document.querySelector(".modal__overlay--loading");

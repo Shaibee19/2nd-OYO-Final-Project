@@ -459,10 +459,12 @@ input {
 
 /* MOVIE CARDS */
 
-.loading {
+.loading,
+.error {
   text-align: center;
   font-size: 1.2rem;
   padding: 40px 0;
+  color: whitesmoke;
 }
 
 .movie__container {
@@ -610,7 +612,7 @@ align-items: center;
   border-radius: 5px;
   color: #bbff00ea;
   font-size: 16px;
-  width: 280px;
+  width: 320px;
 }
 
 
@@ -669,4 +671,10 @@ footer {
 
 .footer__copyright {
   font-size: 12px;
+}
+
+@media (max-width: 550px) {
+  .movie {
+    
+  }
 }

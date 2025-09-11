@@ -1,5 +1,7 @@
 const Featured = () => {
   return (
+    // const randomIndex = Math.floor(Math.random() * movies.length) return movies[randomIndex]
+
     <>
       {/* <section id="features">
         <div className="container">
