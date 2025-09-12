@@ -433,6 +433,7 @@ input {
 .searchName {
   opacity: 0.5;
   color: #f8f8f8;
+  padding-top: 44px;
 }
 
 /* RESULTS */
@@ -460,8 +461,7 @@ input {
 /* MOVIE CARDS */
 
 .loading,
-.error,
-.searchTitle {
+.error {
   text-align: center;
   font-size: 1.2rem;
   padding: 40px 0;
@@ -469,9 +469,9 @@ input {
 }
 
 .movie__container {
-display: flex;
-flex-wrap: wrap;
-justify-content: space-around;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .movie {
@@ -491,7 +491,7 @@ justify-content: space-around;
 }
 
 .movie-card__container {
-padding: 2px 16px;
+  padding: 2px 16px;
 }
 
 .movie-card {

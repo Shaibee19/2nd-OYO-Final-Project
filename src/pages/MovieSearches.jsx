@@ -12,7 +12,7 @@ function MovieSearches() {
   const [movies, setMovies] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(false); // Add loading state
   const [error, setError] = useState(null); // Add error state
   
   const [params] = useSearchParams();
@@ -27,8 +27,10 @@ function MovieSearches() {
       );
       if (data.Response === "False") {
         setError(data.Error);
+        setMovies([]); // Clear old movies
       } else {
-        setMovies(data.Search.slice(0, 10) || [].slice(0, 10)); // OMDB returns { Search: [...] }
+        setMovies(data.Search.slice(0, 10) || []); // OMDB returns { Search: [...] }
+        setError(null); // Clear any previous error
       }
     } catch (err) {
       setError("Failed to fetch movies")
@@ -85,6 +87,7 @@ function MovieSearches() {
         <div className="container">
           <div className="row results__row">
             <h2 className="results__title">Search Results:</h2>
+              <span className="searchName" key={q}> for "{q}"</span>
             <h3 className="results__subtitle">
               Options:
               <select
@@ -113,9 +116,8 @@ function MovieSearches() {
             ) : error ? (
               <p className="error">Error: An error occurred while rounding up those mooviez. Please try again later. {error}</p>
             ) : movies.length ? (
-              [<h2 className="searchTitle" key={q}> Search Results for "{q}"</h2>,
-                ...renderMovies()]
-            ) : null}
+              [...renderMovies()]
+            ) : [<p>No movies found</p>, null]}
           </div>
         </div>
       </section>
