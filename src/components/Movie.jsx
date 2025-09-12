@@ -19,11 +19,7 @@ function Movie({ movie }) {
           </div>
         </div>
       </div>
-    </> 
-    // ) : (<div className="movie__img--skeleton"></div>
-    // <div className="skeleton movie__title--skeleton"></div>
-    // <div className="skeleton movie__year--skeleton"></div>
-    // <div className="skeleton movie__description--skeleton"></div> )}
+    </>
   );
 }
 

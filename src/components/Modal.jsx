@@ -1,4 +1,6 @@
-function Modal({ closeModal, onSubmit }) {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+function Modal({ closeModal, onSubmit }) {  
   // MODAL EMAIL FUNCTION?
   // <script> src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"</script>
   //   <script> (function(){
@@ -35,12 +37,10 @@ function Modal({ closeModal, onSubmit }) {
 
   return (
     <>
+    <div className="modal--open">
       <div className="modal">
         <div className="modal__half modal__right">
-          <i
-            className="fa-solid fa-xmark modal__exit click"
-            onClick={closeModal}
-          ></i>
+          <FontAwesomeIcon className="fa-solid fa-xmark modal__exit click" icon="xmark" onClick={closeModal} />
           <h3 className="modal__title modal__title--right">
             Let's have a chat!
           </h3>
@@ -87,6 +87,7 @@ function Modal({ closeModal, onSubmit }) {
             you soon. 🐮
           </div>
         </div>
+      </div>
       </div>
     </>
   );

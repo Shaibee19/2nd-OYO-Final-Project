@@ -70,7 +70,9 @@ function MovieSearches() {
     setMovies(sorted);
   }
 
-  useEffect(() => {searchMovies();}, [q]);
+ useEffect(() => {
+    if (q) searchMovies(q);
+  }, [q]);
 
   return (
     <>
@@ -101,12 +103,18 @@ function MovieSearches() {
           </div>
           <div className="movie__container">
             {loading ? (
+              <>
               <p className="loading">🍿 Loading movies...</p>
+              <div className="movie__img--skeleton"></div>
+              <div className="skeleton movie__title--skeleton"></div>
+              <div className="skeleton movie__year--skeleton"></div>
+              <div className="skeleton movie__description--skeleton"></div>
+              </>
             ) : error ? (
               <p className="error">Error: An error occurred while rounding up those mooviez. Please try again later. {error}</p>
             ) : movies.length ? (
-              <p className="loading"> Search Results for "{q}"</p>,
-              renderMovies()
+              [<h2 className="searchTitle" key={q}> Search Results for "{q}"</h2>,
+                ...renderMovies()]
             ) : null}
           </div>
         </div>
